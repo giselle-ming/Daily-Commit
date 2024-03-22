@@ -10,12 +10,12 @@ fs.readFile("data.yaml", "utf8", (err, data) => {
   let doc = yaml.load(data);
 
   // Check if doc is undefined
-  if (!doc) {
-    doc = {};
+  if (!doc || !Array.isArray(doc)) {
+    doc = [];
   }
 
-  // Update the date field
-  doc.date = new Date().toISOString();
+  // Add a new object with the current date to the array
+  doc.push({ date: new Date().toISOString() });
 
   // Write back to the YAML file
   fs.writeFile("data.yaml", yaml.dump(doc), (err) => {
