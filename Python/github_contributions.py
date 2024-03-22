@@ -10,11 +10,11 @@ with open('data.yaml', 'r') as file:
     print(exc)
 
 # Check if doc is None
-if doc is None:
-  doc = {}
+if doc is None or not isinstance(doc, list):
+  doc = []
 
-# Update the date field
-doc['date'] = datetime.now().isoformat()
+# Add a new dictionary with the current date to the list
+doc.append({'date': datetime.now().isoformat()})
 
 # Write back to the YAML file
 with open('data.yaml', 'w') as file:
